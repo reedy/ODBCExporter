@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 
 namespace ODBCExporterConsole
 {
@@ -19,6 +18,11 @@ namespace ODBCExporterConsole
 
                 var input = Console.ReadLine();
 
+                if (string.IsNullOrEmpty(input))
+                {
+                    continue;
+                }
+
                 switch (input.ToLower().Trim())
                 {
                     case "1":
@@ -28,10 +32,10 @@ namespace ODBCExporterConsole
 
                     case "2":
                         Console.WriteLine("Enter DSN:");
-                        var dsn = Console.ReadLine().Trim();
-                        if (!string.IsNullOrEmpty(dsn))
+                        var dsn = Console.ReadLine();
+                        if (!string.IsNullOrEmpty(dsn) && !string.IsNullOrEmpty(dsn.Trim()))
                         {
-                            ODBCExporter.ODBCExporter.Export(dsn);
+                            ODBCExporter.ODBCExporter.Export(dsn.Trim());
                             exported = true;
                         }
                         break;
